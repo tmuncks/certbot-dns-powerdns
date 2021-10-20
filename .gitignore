@@ -4,3 +4,4 @@ venv
 .venv
 .idea
 .coveralls.yml
+/dist/
