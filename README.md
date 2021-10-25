@@ -73,5 +73,7 @@ docker-compose up -d
 ```
 
 ## License
+
 Copyright (c) 2019 [DT Pan-Net s.r.o](https://github.com/pan-net-security)
+
 Copyright (c) 2021 [Thomas M. Steenholdt](https://github.com/tmuncks)
