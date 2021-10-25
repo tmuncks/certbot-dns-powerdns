@@ -1,91 +1,66 @@
-[![Build Status](https://travis-ci.com/pan-net-security/certbot-dns-powerdns.svg?branch=master)](https://travis-ci.com/pan-net-security/certbot-dns-powerdns)
-[![Coverage Status](https://coveralls.io/repos/github/pan-net-security/certbot-dns-powerdns/badge.svg?branch=master)](https://coveralls.io/github/pan-net-security/certbot-dns-powerdns?branch=master)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=6cfb0c4728624ebff38afc0b1ef91700795ea9ef&metric=alert_status)](https://sonarcloud.io/dashboard?id=6cfb0c4728624ebff38afc0b1ef91700795ea9ef)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/github/pan-net-security/certbot-dns-powerdns.svg)
-![PyPI - Status](https://img.shields.io/pypi/status/certbot-dns-powerdns.svg)
-
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/certbot-dns-powerdns.svg)
-
-
-certbot-dns-powerdns
-============
-
+# certbot-dns-powerdns
 PowerDNS DNS Authenticator plugin for [Certbot](https://certbot.eff.org/).
 
-Compatibility:
+This plugin is built from the ground up and follows the development style and life-cycle
+of other `certbot-dns-*` plugins found in the [Official Certbot Repository](https://github.com/certbot/certbot).
+
+## Compatibility:
 * PowerDNS Authoritative Server API
 * PowerDNS-Admin API
 
-This plugin is built from the ground up and follows the development style and life-cycle
-of other `certbot-dns-*` plugins found in the
-[Official Certbot Repository](https://github.com/certbot/certbot).
+## Installation
+___NOTE__: This package is not currently published on PyPi. Waiting for [Pull Request](https://github.com/pan-net-security/certbot-dns-powerdns/pull/15) to be accepted upstream. In the meantime, please build and install manually._
+```
+$ git clone git@github.com:tmuncks/certbot-dns-powerdns.git
+$ cd certbot-dns-powerdns
+$ python3 -m build
 
-Installation
-------------
+$ sudo pip3 install certbot
+$ sudo pip3 install ./dist/certbot_dns_powerdns-<version>-py2.py3-none-any.whl
+```
 
+<!--- commented out for when work is accepted upstream
 ```
 pip install --upgrade certbot
 pip install certbot-dns-powerdns
 ```
+-->
 
 Verify:
 
 ```
-$ certbot plugins --text
+$ certbot plugins
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-* certbot-dns-powerdns:dns-powerdns
+* dns-powerdns
 Description: Obtain certificates using a DNS TXT record (if you are using
 PowerDNS for DNS.)
-Interfaces: IAuthenticator, IPlugin
+Interfaces: Authenticator, Plugin
 Entry point: dns-powerdns = certbot_dns_powerdns.dns_powerdns:Authenticator
-
 ...
 ...
 ```
 
-Configuration
--------------
-
+## Configuration
 The credentials file e.g. `~/pdns-credentials.ini` should look like this:
 
 ```
-certbot_dns_powerdns:dns_powerdns_api_url = https://api.mypowerdns.example.org
-certbot_dns_powerdns:dns_powerdns_api_key = AbCbASsd!@34
+dns_powerdns_api_url = https://api.mypowerdns.example.org
+dns_powerdns_api_key = AbCbASsd!@34
 ```
 
-Usage
------
-
-
+## Usage
 ```
 certbot ... \
-        --authenticator certbot-dns-powerdns:dns-powerdns  \
-        --certbot-dns-powerdns:dns-powerdns-credentials ~/pdns-credentials.ini \
+        --authenticator dns-powerdns \
+        --dns-powerdns-credentials /etc/letsencrypt/pdns-credentials.ini \
         certonly
 ```
 
-FAQ
------
-
-##### Why such long name for a plugin?
-
+## FAQ
+#### Why such long name for a plugin?
 This follows the upstream nomenclature: `certbot-dns-<dns-provider>`.
 
-##### Why do I have to use `:` separator in the name? And why are the configuration file parameters so weird?
-
-This is a limitation of the Certbot interface towards _third-party_ plugins.
-
-For details read the discussions:
-
-- https://github.com/certbot/certbot/issues/6504#issuecomment-473462138
-- https://github.com/certbot/certbot/issues/6040
-- https://github.com/certbot/certbot/issues/4351
-- https://github.com/certbot/certbot/pull/6372
-
-Development
------------
-
+## Development
 Create a virtualenv, install the plugin (`editable` mode),
 spawn the environment and run the test:
 
@@ -97,7 +72,6 @@ docker-compose up -d
 ./test/run_certonly.sh test/pdns-credentials.ini
 ```
 
-License
---------
-
+## License
 Copyright (c) 2019 [DT Pan-Net s.r.o](https://github.com/pan-net-security)
+Copyright (c) 2021 [Thomas M. Steenholdt](https://github.com/tmuncks)
