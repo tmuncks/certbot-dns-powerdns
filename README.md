@@ -11,7 +11,7 @@ of other `certbot-dns-*` plugins found in the [Official Certbot Repository](http
 ## Installation
 ___NOTE__: This package is not currently published on PyPi. Waiting for [Pull Request](https://github.com/pan-net-security/certbot-dns-powerdns/pull/15) to be accepted upstream. In the meantime, please build and install manually._
 ```
-$ git clone git@github.com:tmuncks/certbot-dns-powerdns.git
+$ git clone https://github.com/tmuncks/certbot-dns-powerdns.git
 $ cd certbot-dns-powerdns
 $ python3 -m build
 
